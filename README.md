@@ -28,3 +28,10 @@ from oneline.quickbot import quickbot
 
 quickbot(api_key, input_function).run()
 ```
+#### Quickly generation for seq2seq model:
+```python
+from oneline.quickgen import quickgen
+
+pipeline = quickgen('VietAI/vit5-base-vietnews-summarization')
+pipeline.predict(text)
+```
