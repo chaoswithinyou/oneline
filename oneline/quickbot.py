@@ -28,11 +28,11 @@ class quickbot:
         @self.bot.message_handler(commands=['url'])
         def url(message):
             input_text = get_text(message.text[5:])
-            self.bot.send_message(message.chat.id, self.input_function(input_text))
+            self.bot.send_message(message.chat.id, str(self.input_function(input_text)))
         
         @self.bot.message_handler(commands=['text'])
         def text(message):
-            self.bot.send_message(message.chat.id, self.input_function(message.text[6:]))
+            self.bot.send_message(message.chat.id, str(self.input_function(message.text[6:])))
 
     def run(self, timeout=10, long_polling_timeout=5):
         self.bot.infinity_polling(timeout=timeout, long_polling_timeout=long_polling_timeout)
