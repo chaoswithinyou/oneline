@@ -28,3 +28,10 @@ from oneline.quickbot import quickbot
 
 quickbot(api_key, input_function).run()
 ```
+#### Quickly generation for seq2seq model:
+```python
+from oneline.quickgen import quickgen
+
+pipeline = quickgen(huggingface_model_name)
+pipeline.predict(text) # max_input_length = 1024, max_gen_length = 256
+```
