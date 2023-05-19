@@ -8,8 +8,7 @@ setup(
     install_requires=[
         'news-please',
         'pyTelegramBotAPI',
-        'transformers',
-        'sentencepiece',
+        'transformers[sentencepiece]',
     ]
 )
 
