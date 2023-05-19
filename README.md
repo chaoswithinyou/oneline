@@ -1,9 +1,20 @@
 # One line of code for common task
 
+### Installation
+#### Install from source
+```
+pip install git+https://github.com/chaoswithinyou/oneline
+```
+#### Editable install
+```
+git clone https://github.com/chaoswithinyou/oneline
+cd oneline
+pip install -e .
+```
 ### Example usage
-
+#### Mesure execution time:
 ```python
-from timer import timer
+from oneline.timer import timer
 from time import sleep
 
 with timer() as t:
@@ -11,9 +22,9 @@ with timer() as t:
 
 print(t)
 ```
-
+#### Quickly test news API with telegram bot:
 ```python
-from quickbot import quickbot
+from oneline.quickbot import quickbot
 
 quickbot(api_key, input_function).run()
 ```
