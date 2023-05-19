@@ -32,6 +32,6 @@ quickbot(api_key, input_function).run()
 ```python
 from oneline.quickgen import quickgen
 
-pipeline = quickgen('VietAI/vit5-base-vietnews-summarization')
-pipeline.predict(text)
+pipeline = quickgen(huggingface_model_name)
+pipeline.predict(text) # max_input_length = 1024, max_gen_length = 256
 ```
