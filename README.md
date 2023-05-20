@@ -28,6 +28,15 @@ from oneline.quickbot import quickbot
 
 quickbot(api_key, input_function).run()
 ```
+#### Quickly create label telegram bot:
+```python
+from oneline.quickbot import labelbot, highlight_text
+
+labelbot(api_key, jsonl_input_dir, jsonl_output_dir).run()
+# optional
+highlight_function = highlight_text(highlight_list).highlight
+labelbot(api_key, jsonl_input_dir, jsonl_output_dir, highlight_function).run()
+```
 #### Quickly generation for seq2seq model:
 ```python
 from oneline.quickgen import quickgen

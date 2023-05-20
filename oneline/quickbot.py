@@ -40,7 +40,7 @@ class quickbot:
 
 
 class labelbot:
-    def __init__(self, api_key, jsonl_input_dir, jsonl_output_dir):
+    def __init__(self, api_key, jsonl_input_dir, jsonl_output_dir, highlight_function=None):
         self.api_key = api_key
         self.bot = telebot.TeleBot(self.api_key)
         self.texts = []
@@ -68,7 +68,10 @@ class labelbot:
             else:
                 self.current_text = texts[self.current_count]
                 self.bot.send_message(message.chat.id, str(self.current_count))
-                self.bot.send_message(message.chat.id, self.current_text)
+                if highlight_function != None:
+                    self.bot.send_message(message.chat.id, highlight_function(self.current_text))
+                else:
+                    self.bot.send_message(message.chat.id, self.current_text)
                 self.current_count += 1
         
         @self.bot.message_handler(commands=['b'])
@@ -84,3 +87,12 @@ class labelbot:
 
     def run(self, timeout=10, long_polling_timeout=5):
         self.bot.infinity_polling(timeout=timeout, long_polling_timeout=long_polling_timeout)
+
+
+class highlight_text:
+    def __init__(self, highlight_list):
+        self.highlight_list = highlight_list
+    def highlight(self, text):
+        for obj in highlight_list:
+            text.replace(obj, '|||'+obj+'|||')
+        return text
