@@ -92,7 +92,7 @@ class labelbot:
 class highlight_text:
     def __init__(self, highlight_list):
         self.highlight_list = highlight_list
-    def highlight(self, text):
+    def __call__(self, text):
         for obj in highlight_list:
             text.replace(obj, '|||'+obj+'|||')
         return text
