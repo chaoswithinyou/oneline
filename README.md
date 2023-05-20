@@ -28,14 +28,14 @@ print(t)
 from oneline.quickbot import quickbot
 
 
-quickbot(api_key, input_function).run()
+quickbot(api_key, input_function).run() # /url for url input and /text for text input
 ```
 #### Quickly create label telegram bot:
 ```python
 from oneline.quickbot import labelbot, highlight_text
 
 
-labelbot(api_key, jsonl_input_dir, jsonl_output_dir).run()
+labelbot(api_key, jsonl_input_dir, jsonl_output_dir).run() # /a to get text and /b to label
 
 # optional
 highlight_function = highlight_text(highlight_list)
