@@ -9,6 +9,7 @@ setup(
         'news-please',
         'pyTelegramBotAPI',
         'transformers[sentencepiece]',
+        'jsonlines',
     ]
 )
 

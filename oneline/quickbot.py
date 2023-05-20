@@ -1,5 +1,6 @@
 import telebot
 from newsplease import NewsPlease
+import jsonlines
 
 
 def get_text(url):
@@ -33,6 +34,53 @@ class quickbot:
         @self.bot.message_handler(commands=['text'])
         def text(message):
             self.bot.send_message(message.chat.id, str(self.input_function(message.text[6:])))
+
+    def run(self, timeout=10, long_polling_timeout=5):
+        self.bot.infinity_polling(timeout=timeout, long_polling_timeout=long_polling_timeout)
+
+
+class labelbot:
+    def __init__(self, api_key, jsonl_input_dir, jsonl_output_dir):
+        self.api_key = api_key
+        self.bot = telebot.TeleBot(self.api_key)
+        self.texts = []
+        self.done_count = 0
+        self.current_count = 0
+        
+        try
+            with jsonlines.open(jsonl_output_dir) as reader:
+                for article in reader:
+                    self.done_count += 1
+        except Exception:
+            pass
+
+        with jsonlines.open(jsonl_dir) as reader:
+            for article in reader:
+                if self.done_count > 0:
+                    self.done_count -= 1
+                    continue
+                self.texts.append(article['text'])
+        
+        @self.bot.message_handler(commands=['a'])
+        def a(message):
+            if self.current_count == len(texts):
+                self.bot.send_message(message.chat.id, 'No more samples left.')
+            else:
+                self.current_text = texts[self.current_count]
+                self.bot.send_message(message.chat.id, str(self.current_count))
+                self.bot.send_message(message.chat.id, self.current_text)
+                self.current_count += 1
+        
+        @self.bot.message_handler(commands=['b'])
+        def b(message):
+            label_text = get_text(message.text[3:])
+            try:
+                with jsonlines.open(jsonl_output_dir, mode='a') as writer:
+                    writer.write({'text':self.current_text, 'label_text':label_text})
+                self.bot.send_message(message.chat.id, f'{str(self.current_count)} done.')
+            except Exception:
+                self.bot.send_message(message.chat.id, 'Something went wrong.')
+            
 
     def run(self, timeout=10, long_polling_timeout=5):
         self.bot.infinity_polling(timeout=timeout, long_polling_timeout=long_polling_timeout)
