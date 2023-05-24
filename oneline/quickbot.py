@@ -47,7 +47,7 @@ class labelbot:
         self.done_count = 0
         self.current_count = 0
         
-        try
+        try:
             with jsonlines.open(jsonl_output_dir) as reader:
                 for article in reader:
                     self.done_count += 1
