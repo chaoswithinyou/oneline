@@ -93,6 +93,8 @@ class highlight_text:
     def __init__(self, highlight_list):
         self.highlight_list = highlight_list
     def __call__(self, text):
+        count = 1
         for obj in highlight_list:
-            text.replace(obj, '|||'+obj+'|||')
+            text.replace(obj, "*<" + str(count) + "> " +obj+'*')
+            count += 1
         return text
