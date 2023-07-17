@@ -2,7 +2,6 @@ import telebot
 from telebot import util
 from newsplease import NewsPlease
 import jsonlines
-import re
 
 
 def get_text(url):
@@ -95,13 +94,13 @@ class labelbot:
 
 
 def replace_occurrences(input_string, substring):
-    def replace_with_counter(match):
-        nonlocal counter
-        counter += 1
-        return "||" + str(counter) + "|| "
+    replaced_string = input_string
+    occurrence_count = 1
 
-    counter = 0
-    return re.sub(substring, replace_with_counter, input_string, count=len(re.findall(substring, input_string)))
+    while substring in replaced_string:
+        replaced_string = replaced_string.replace(substring, "||" + str(occurrence_count) + "|| ", 1)
+        occurrence_count += 1
+    return replaced_string
 
 
 class highlight_text:
@@ -110,6 +109,6 @@ class highlight_text:
     def __call__(self, text):
         for obj in self.highlight_list:
             if obj in text:
-                text = text.replace(obj, "kkkkk " + obj + "|||")
-            text = replace_occurrences(text, "kkkkk")
+                text = text.replace(obj, "-----" + obj + "|||")
+            text = replace_occurrences(text, "-----")
         return text
