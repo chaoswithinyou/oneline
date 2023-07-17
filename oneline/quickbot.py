@@ -59,7 +59,7 @@ class labelbot:
                 if self.done_count > 0:
                     self.done_count -= 1
                     continue
-                self.texts.append(article['text'][:9500])
+                self.texts.append(article['text'][:4096])
         
         @self.bot.message_handler(commands=['a'])
         def a(message):
