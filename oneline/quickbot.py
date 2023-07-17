@@ -54,7 +54,7 @@ class labelbot:
         except Exception:
             pass
 
-        with jsonlines.open(jsonl_dir) as reader:
+        with jsonlines.open(jsonl_input_dir) as reader:
             for article in reader:
                 if self.done_count > 0:
                     self.done_count -= 1
