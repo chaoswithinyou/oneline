@@ -95,7 +95,7 @@ class highlight_text:
         self.highlight_list = highlight_list
     def __call__(self, text):
         count = 1
-        for obj in highlight_list:
+        for obj in self.highlight_list:
             if obj in text:
                 text = text.replace(obj, "*<" + str(count) + "> " + obj + '*')
                 count += 1
