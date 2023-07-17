@@ -110,5 +110,5 @@ class highlight_text:
         for obj in self.highlight_list:
             if obj in text:
                 text = text.replace(obj, "-----" + obj + "|||")
-            text = replace_occurrences(text, "-----")
+        text = replace_occurrences(text, "-----")
         return text
