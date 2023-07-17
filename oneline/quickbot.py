@@ -70,14 +70,13 @@ class labelbot:
                 self.bot.send_message(message.chat.id, 'No more samples left.')
             else:
                 self.current_text = self.texts[self.current_count]
-                self.bot.send_message(message.chat.id, str(self.current_count))
+                self.bot.send_message(message.chat.id, str(self.current_count + 1))
                 if self.highlight_function != None:
                     splitted_text = util.smart_split(self.highlight_function(self.current_text), chars_per_string=2000)
                 else:
                     splitted_text = util.smart_split(self.current_text, chars_per_string=2000)
                 for text in splitted_text:
                     self.bot.send_message(message.chat.id, text)
-                self.current_count += 1
         
         @self.bot.message_handler(commands=['b'])
         def b(message):
@@ -85,7 +84,8 @@ class labelbot:
             try:
                 with jsonlines.open(jsonl_output_dir, mode='a') as writer:
                     writer.write({'text':self.current_text, 'label_text':label_text})
-                self.bot.send_message(message.chat.id, f'{str(self.current_count)} done.')
+                self.bot.send_message(message.chat.id, f'{str(self.current_count + 1)} done.')
+                self.current_count += 1
             except Exception:
                 self.bot.send_message(message.chat.id, 'Something went wrong.')
             
