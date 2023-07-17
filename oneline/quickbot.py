@@ -43,6 +43,7 @@ class labelbot:
     def __init__(self, api_key, jsonl_input_dir, jsonl_output_dir, highlight_function=None):
         self.api_key = api_key
         self.bot = telebot.TeleBot(self.api_key)
+        self.highlight_function = highlight_function
         self.texts = []
         self.done_count = 0
         self.current_count = 0
@@ -69,8 +70,7 @@ class labelbot:
                 self.current_text = self.texts[self.current_count]
                 self.bot.send_message(message.chat.id, str(self.current_count))
                 if highlight_function != None:
-                    self.bot.send_message(message.chat.id, highlight_function(self.current_text))
-                    print("0")
+                    self.bot.send_message(message.chat.id, self.highlight_function(self.current_text))
                 else:
                     self.bot.send_message(message.chat.id, self.current_text)
                 self.current_count += 1
@@ -97,6 +97,6 @@ class highlight_text:
         count = 1
         for obj in highlight_list:
             if obj in text:
-                text = text.replace(obj, "*<" + str(count) + "> " +obj+'*')
+                text = text.replace(obj, "*<" + str(count) + "> " + obj + '*')
                 count += 1
         return text
