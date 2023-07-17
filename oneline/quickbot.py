@@ -98,7 +98,7 @@ def replace_occurrences(input_string, substring):
     def replace_with_counter(match):
         nonlocal counter
         counter += 1
-        return "||" + str(counter) + "|| " + match.group(0) + "|||"
+        return "||" + str(counter) + "|| "
 
     counter = 0
     return re.sub(substring, replace_with_counter, input_string, count=len(re.findall(substring, input_string)))
@@ -108,9 +108,8 @@ class highlight_text:
     def __init__(self, highlight_list):
         self.highlight_list = highlight_list
     def __call__(self, text):
-        count = 1
         for obj in self.highlight_list:
             if obj in text:
-                text = replace_occurrences(text, obj)
-                count += 1
+                text = text.replace(obj, "kkkkk " + obj + "|||")
+            text = replace_occurrences(text, "kkkkk")
         return text
