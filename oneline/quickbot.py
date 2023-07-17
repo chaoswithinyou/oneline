@@ -81,7 +81,7 @@ class labelbot:
         
         @self.bot.message_handler(commands=['b'])
         def b(message):
-            label_text = get_text(message.text[3:])
+            label_text = message.text[3:]
             try:
                 with jsonlines.open(jsonl_output_dir, mode='a') as writer:
                     writer.write({'text':self.current_text, 'label_text':label_text})
@@ -98,7 +98,7 @@ def replace_occurrences(input_string, substring):
     def replace_with_counter(match):
         nonlocal counter
         counter += 1
-        return "|||" + str(counter) + "| " + match.group(0) + "|||"
+        return "||" + str(counter) + "|| " + match.group(0) + "|||"
 
     counter = 0
     return re.sub(substring, replace_with_counter, input_string, count=len(re.findall(substring, input_string)))
