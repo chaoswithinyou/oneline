@@ -69,10 +69,10 @@ class labelbot:
             else:
                 self.current_text = self.texts[self.current_count]
                 self.bot.send_message(message.chat.id, str(self.current_count))
-                if self.highlight_function != None:
-                    self.bot.send_message(message.chat.id, self.highlight_function(self.current_text))
-                else:
-                    self.bot.send_message(message.chat.id, self.current_text)
+                # if self.highlight_function != None:
+                self.bot.send_message(message.chat.id, self.highlight_function(self.current_text))
+                # else:
+                #     self.bot.send_message(message.chat.id, self.current_text)
                 self.current_count += 1
         
         @self.bot.message_handler(commands=['b'])
