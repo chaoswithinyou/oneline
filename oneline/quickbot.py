@@ -1,4 +1,5 @@
 import telebot
+from telebot import util
 from newsplease import NewsPlease
 import jsonlines
 
@@ -60,7 +61,7 @@ class labelbot:
                 if self.done_count > 0:
                     self.done_count -= 1
                     continue
-                self.texts.append(article['text'][:4096])
+                self.texts.append(article['text'])
         
         @self.bot.message_handler(commands=['a'])
         def a(message):
@@ -69,10 +70,12 @@ class labelbot:
             else:
                 self.current_text = self.texts[self.current_count]
                 self.bot.send_message(message.chat.id, str(self.current_count))
-                # if self.highlight_function != None:
-                self.bot.send_message(message.chat.id, self.highlight_function(self.current_text))
-                # else:
-                #     self.bot.send_message(message.chat.id, self.current_text)
+                if self.highlight_function != None:
+                    splitted_text = util.smart_split(self.highlight_function(self.current_text), chars_per_string=2000)
+                else:
+                    splitted_text = util.smart_split(self.current_text, chars_per_string=2000)
+                for text in splitted_text:
+                    self.bot.send_message(message.chat.id, text)
                 self.current_count += 1
         
         @self.bot.message_handler(commands=['b'])
