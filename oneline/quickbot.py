@@ -70,6 +70,7 @@ class labelbot:
                 self.bot.send_message(message.chat.id, str(self.current_count))
                 if highlight_function != None:
                     self.bot.send_message(message.chat.id, highlight_function(self.current_text))
+                    print("0")
                 else:
                     self.bot.send_message(message.chat.id, self.current_text)
                 self.current_count += 1
@@ -95,6 +96,7 @@ class highlight_text:
     def __call__(self, text):
         count = 1
         for obj in highlight_list:
-            text = text.replace(obj, "*<" + str(count) + "> " +obj+'*')
-            count += 1
+            if obj in text:
+                text = text.replace(obj, "*<" + str(count) + "> " +obj+'*')
+                count += 1
         return text
