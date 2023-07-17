@@ -63,7 +63,7 @@ class labelbot:
         
         @self.bot.message_handler(commands=['a'])
         def a(message):
-            if self.current_count == len(texts):
+            if self.current_count == len(self.texts):
                 self.bot.send_message(message.chat.id, 'No more samples left.')
             else:
                 self.current_text = texts[self.current_count]
