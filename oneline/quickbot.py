@@ -66,7 +66,7 @@ class labelbot:
             if self.current_count == len(self.texts):
                 self.bot.send_message(message.chat.id, 'No more samples left.')
             else:
-                self.current_text = texts[self.current_count]
+                self.current_text = self.texts[self.current_count]
                 self.bot.send_message(message.chat.id, str(self.current_count))
                 if highlight_function != None:
                     self.bot.send_message(message.chat.id, highlight_function(self.current_text))
