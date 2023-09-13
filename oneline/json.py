@@ -1,6 +1,19 @@
 import json
 from random import shuffle
 
+
+def save_json(data, path):
+    with open(path, "w") as f:
+        json.dump(data, path, indent=4, ensure_ascii=False)
+
+
+def load_json(data, path):
+    with open(path) as f:
+        data = json.load(f)
+    
+    return data
+
+
 class jsonWrapper:
     def __init__(self, json_path) -> None:
         try:
@@ -22,14 +35,12 @@ class jsonWrapper:
         if shuffle:
             for i in range(10):
                 shuffle(self.data)
-        train_limit = train_propotion*len(self.data)
-        train = self.data[:int(train_limit)]
-        val = self.data[int(train_limit):]
+        train_limit = train_propotion * len(self.data)
+        train = self.data[: int(train_limit)]
+        val = self.data[int(train_limit) :]
 
         print(f"Shuffle: {shuffel}")
         print(f"Length of training data: {len(train)}")
         print(f"Length of validation data: {len(val)}")
 
         return train, val
-
-
