@@ -3,16 +3,20 @@ from random import shuffle
 
 
 def save_json(data, path):
-    with open(path, "w") as f:
-        json.dump(data, path, indent=4, ensure_ascii=False)
+    try:
+        with open(path, "w") as f:
+            json.dump(data, f, indent=4, ensure_ascii=False)
+    except Exception as e:
+        print(e)
 
 
-def load_json(data, path):
-    with open(path) as f:
-        data = json.load(f)
-    
-    return data
-
+def load_json(path):
+    try:
+        with open(path) as f:
+            data = json.load(f)
+        return data
+    except Exception as e:
+        print(e)
 
 class jsonWrapper:
     def __init__(self, json_path) -> None:
