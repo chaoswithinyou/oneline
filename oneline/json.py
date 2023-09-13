@@ -1,7 +1,7 @@
 import json
+from random import shuffle
 
-
-class jsonOps:
+class jsonWrapper:
     def __init__(self, json_path) -> None:
         try:
             with open(json_path) as f:
@@ -17,3 +17,19 @@ class jsonOps:
 
     def __getitem__(self, index):
         return self.data[index]
+
+    def split_train_val(self, train_propotion: float = 0.8, shuffel: bool = True):
+        if shuffle:
+            for i in range(10):
+                shuffle(self.data)
+        train_limit = train_propotion*len(self.data)
+        train = self.data[:int(train_limit)]
+        val = self.data[int(train_limit):]
+
+        print(f"Shuffle: {shuffel}")
+        print(f"Length of training data: {len(train)}")
+        print(f"Length of validation data: {len(val)}")
+
+        return train, val
+
+
