@@ -1,7 +1,7 @@
 import json
 
 
-class json:
+class jsonOps:
     def __init__(self, json_path) -> None:
         try:
             with open(json_path) as f:
