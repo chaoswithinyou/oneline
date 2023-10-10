@@ -20,11 +20,11 @@ def get_content(links: list[str] = None):
             try:
                 article = NewsPlease.from_url(link)
                 text = article.maintext
-                texts.append
+                texts.append(text)
             except Exception as e:
                 print(f"Couldn't get the content from link {link}, try again!")
                 print(f"Error: {e}")
 
-        return text
+        return texts
     else:
         print("Please give article links as list of strings")
