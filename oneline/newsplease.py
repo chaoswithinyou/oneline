@@ -27,4 +27,4 @@ def get_content(links: list[str] = None):
 
         return text
     else:
-        print("Please give a article links")
+        print("Please give article links as list of strings")
