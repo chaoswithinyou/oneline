@@ -27,9 +27,7 @@ def get_text(url):
         fulltext = article.maintext
         return fulltext
     except Exception as e:
-        print(e)
-
-        return "Error"
+        return "Lỗi: không đọc được tin bài."
 
 
 class quickbot:
