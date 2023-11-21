@@ -22,11 +22,11 @@ def get_text_old(url):
 
 
 def get_text(url):
-    try:
-        article = NewsPlease.from_url(url)
-        fulltext = article.maintext
+    article = NewsPlease.from_url(url)
+    fulltext = article.maintext
+    if fulltext:
         return fulltext
-    except Exception as e:
+    else:
         return "Lỗi: không đọc được tin bài."
 
 
