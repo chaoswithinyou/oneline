@@ -2,7 +2,7 @@ import telebot
 from newsplease import NewsPlease
 
 
-def get_text(url):
+def get_text_old(url):
     try:
         article = NewsPlease.from_url(url)
         try:
@@ -19,6 +19,17 @@ def get_text(url):
         return fulltext
     except Exception:
         return "Error 2"
+
+
+def get_text(url):
+    try:
+        article = NewsPlease.from_url(url)
+        fulltext = article.maintext
+        return fulltext
+    except Exception as e:
+        print(e)
+
+        return "Error"
 
 
 class quickbot:
